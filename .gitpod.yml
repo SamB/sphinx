@@ -1,0 +1,21 @@
+# Gitpod configuration file -- set things up for development
+# See https://www.gitpod.io/docs/config-gitpod-file
+
+# Somewhat based on doc/internals/contributing.rst
+# and .github/workflows/main.yml
+
+# Hopefully the Python extension will pick up a pipenv?
+tasks:
+  - init: |
+      set -e
+      sudo apt-get -y install graphviz
+      pip install -U tox codecov
+      virtualenv ./.venv
+      . ./.venv/bin/activate
+      pip install -e .[docs,lint,test]
+      #PIPENV_VENV_IN_PROJECT=yes pipenv install -e .[docs,lint,test]
+      npm install
+vscode:
+  extensions:
+    - the-compiler.python-tox
+    - ms-python.python
